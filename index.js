@@ -1,4 +1,6 @@
 import  express  from "express";
+import  morgan   from "morgan";
+
 const app = express();
 const PORT = 4000;
 
@@ -11,6 +13,15 @@ let products = [
     { id: 6, name: "Bread", category: "Bakery", price: 125, quantity: 60, description: "Freshly baked bread", supplier: "BakeryBest" }
   ];
 
+
+  function middleware(req, res ,next){
+    console.log("middleware");
+    next()
+  }
+  
+  app.use(morgan('tiny')
+)
+  app.use(middleware)
 app.get ( "/", ( req, res)=>{
 console. log(req);
 
