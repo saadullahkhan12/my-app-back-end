@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
     let newUser = new Users({ firstname, lastname, email });  // Use the values directly
     try {
         newUser = await newUser.save();
-        sendResponses(res, 201, newUser, false, "User ad successfully");
+        sendResponses(res, 201, newUser, false, "User addeed successfully");
     } catch (error) {
         sendResponses(res, 500, null, true, "Error adding user");
     }
