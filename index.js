@@ -1,49 +1,34 @@
-import  express  from "express";
-import  morgan   from "morgan";
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
+import userRoutes from './routers/Users.js';
+import productsRoutes from './routers/products.js';
+import 'dotenv/config'
+import mongoose from 'mongoose';
 
 const app = express();
 const PORT = 4000;
 
-let products = [
-    { id: 1, name: "Apple", category: "Fruit", price: 4445, quantity: 30, description: "Fresh red apples", supplier: "FruitCo" },
-    { id: 2, name: "Banana", category: "Fruit", price: 442, quantity: 50, description: "Ripe yellow bananas", supplier: "TropicalFruits" },
-    { id: 3, name: "Carrot", category: "Vegetable", price: 448, quantity: 40, description: "Organic carrots", supplier: "VeggieFarm" },
-    { id: 4, name: "Chicken", category: "Meat", price: 540, quantity: 20, description: "Free-range chicken", supplier: "FarmMeat" },
-    { id: 5, name: "Milk", category: "Dairy", price: 220, quantity: 100, description: "Fresh whole milk", supplier: "DairyFarm" },
-    { id: 6, name: "Bread", category: "Bakery", price: 125, quantity: 60, description: "Freshly baked bread", supplier: "BakeryBest" }
-  ];
+app.use(cors());
+app.use(morgan('tiny'));
+app.use(express.json());
+
+function middleware(req, res, next) {
+  console.log('middleware');
+  next();
+}
+mongoose.connect(process.env.MONGODB_URL)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  });
 
 
-  function middleware(req, res ,next){
-    console.log("middleware");
-    next()
-  }
-  
-  app.use(morgan('tiny')
-)
-  app.use(middleware)
-app.get ( "/", ( req, res)=>{
-console. log(req);
 
-    res.send(products);
+app.use(middleware);
+
+app.use('/users', userRoutes);
+app.use('/items', productsRoutes);  // Make sure this points to products route
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-app.post ( "/", ( req, res)=>{
-    console. log(req);
-    
-        res.send("Hello sir");
-    });
-    app.delete ( "/", ( req, res)=>{
-        console. log(req);
-        
-            res.send("Hello madam");
-        });
-        app.put ( "/", ( req, res)=>{
-            console. log(req);
-            
-                res.send("Hello teacher");
-            });
-        
-app.listen(PORT , ()=>
-    console.log( "port" + PORT )
-    
-);
