@@ -7,7 +7,7 @@ let products = [
   { id: 3, name: 'Carrot', category: 'Vegetable', price: 448, quantity: 40, description: 'Organic carrots', supplier: 'VeggieFarm' },
   { id: 4, name: 'Chicken', category: 'Meat', price: 540, quantity: 20, description: 'Free-range chicken', supplier: 'FarmMeat' },
   { id: 5, name: 'Milk', category: 'Dairy', price: 220, quantity: 100, description: 'Fresh whole milk', supplier: 'DairyFarm' },
-  { id: 6, name: 'Bread', category: 'Bakery', price: 125, quantity: 60, description: 'Freshly baked bread', supplier: 'BakeryBest' },
+  { id: 6, name: 'sas', category: 'Bakery', price: 125, quantity: 60, description: 'Freshly baked bread', supplier: 'BakeryBest' },
 ];
 
 // Get all products
